@@ -1,0 +1,12 @@
+.fromBottom-enter-active,
+.fromBottom-leave-active {
+  transform: translateY(0) translateX(-50%);
+  opacity: 1;
+  transition: 0.5s;
+}
+
+.fromBottom-enter-from,
+.fromBottom-leave-to {
+  transform: translateY(25px) translateX(-50%);
+  opacity: 0;
+}

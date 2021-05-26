@@ -1,30 +1,35 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+  <Navbar />
+  <ModalContainer />
+  <Error />
+  <router-view />
 </template>
 
+<script>
+import Navbar from "@/components/navbar/Navbar.vue";
+import ModalContainer from "@/components/modal/ModalContainer";
+import Error from "@/components/modal/Error";
+
+export default {
+  name: "App",
+  components: {
+    Navbar,
+    ModalContainer,
+    Error,
+  },
+  beforeMount: function() {
+    this.$store.dispatch("initAuth");
+  },
+};
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+@import "@/scss/_animations.scss";
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800;900&display=swap");
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Nunito", sans-serif;
 }
 </style>
