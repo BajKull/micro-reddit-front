@@ -1,0 +1,48 @@
+.mainButton {
+  background: $main;
+  color: white;
+  padding: 10px 25px;
+  border-radius: 5px;
+  border: 0;
+  margin-left: auto;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background: darken($main, 5);
+  }
+}
+
+.mainInput {
+  background: $gray;
+  border: 0;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.mainInputDarker {
+  background: darken($gray, 5);
+  border: 0;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.mainSubmit {
+  background: $main;
+  color: white;
+  font-weight: 700;
+  width: 50%;
+  margin: 25px auto 10px auto;
+  display: block;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border: 0;
+  padding: 10px;
+  border-radius: 5px;
+  &:hover {
+    background: darken($main, 5);
+  }
+}

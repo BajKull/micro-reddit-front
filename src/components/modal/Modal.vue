@@ -28,7 +28,7 @@ export default {
 
 <style lang="scss">
 @import "@/scss/_colors.scss";
-
+@import "@/scss/_inputs.scss";
 .modal {
   position: absolute;
   width: 100%;
@@ -49,31 +49,13 @@ export default {
     border-radius: 10px;
     padding: 25px;
 
+    h1 {
+      text-align: center;
+    }
+
     form {
       display: flex;
       flex-direction: column;
-
-      input {
-        background: $gray;
-        border: 0;
-        padding: 10px;
-        border-radius: 5px;
-        margin-bottom: 10px;
-      }
-
-      input[type="submit"] {
-        background: $main;
-        color: white;
-        font-weight: 700;
-        width: 50%;
-        margin: 25px auto 10px auto;
-        display: block;
-        cursor: pointer;
-        transition: background-color 0.2s;
-        &:hover {
-          background: darken($main, 5);
-        }
-      }
 
       label {
         text-align: left;

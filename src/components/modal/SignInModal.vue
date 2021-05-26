@@ -3,10 +3,15 @@
     <h1>Sign In</h1>
     <form @submit="signIn">
       <label for="username">Username</label>
-      <input v-model="username" type="text" name="username" />
+      <input class="mainInput" v-model="username" type="text" name="username" />
       <label for="password">Password</label>
-      <input v-model="password" type="password" name="password" />
-      <input type="submit" />
+      <input
+        class="mainInput"
+        v-model="password"
+        type="password"
+        name="password"
+      />
+      <input class="mainSubmit" type="submit" />
     </form>
     <p>
       Don't have an account?

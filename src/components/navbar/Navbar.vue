@@ -44,6 +44,7 @@ export default {
   padding: 10px 0;
   align-items: center;
   position: relative;
+  height: 40px;
 
   a {
     text-decoration: none;

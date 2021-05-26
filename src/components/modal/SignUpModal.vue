@@ -3,14 +3,38 @@
     <h1>Sign up</h1>
     <form @submit="signUp">
       <label for="username">Username</label>
-      <input required v-model="username" type="text" name="username" />
+      <input
+        class="mainInput"
+        required
+        v-model="username"
+        type="text"
+        name="username"
+      />
       <label for="email">Email</label>
-      <input required v-model="email" type="email" name="email" />
+      <input
+        class="mainInput"
+        required
+        v-model="email"
+        type="email"
+        name="email"
+      />
       <label for="password">Password</label>
-      <input required v-model="password" type="password" name="password" />
+      <input
+        class="mainInput"
+        required
+        v-model="password"
+        type="password"
+        name="password"
+      />
       <label for="password2">Confirm Password</label>
-      <input required v-model="password2" type="password" name="password2" />
-      <input type="submit" />
+      <input
+        class="mainInput"
+        required
+        v-model="password2"
+        type="password"
+        name="password2"
+      />
+      <input type="submit" class="mainSubmit" />
     </form>
     <p>
       Already have an account?

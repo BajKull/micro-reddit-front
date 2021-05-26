@@ -30,7 +30,8 @@ export default {
   list-style-type: none;
   width: 150px;
   border-radius: 5px;
-  background: $gray;
+  background: white;
+  border: 2px solid $gray;
   padding: 5px 0;
 
   .userPanelEl {
