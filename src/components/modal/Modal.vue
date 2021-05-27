@@ -51,6 +51,7 @@ export default {
 
     h1 {
       text-align: center;
+      margin-bottom: 15px;
     }
 
     form {

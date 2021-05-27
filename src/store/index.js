@@ -6,9 +6,11 @@ export default createStore({
     user: null,
     modal: "",
     error: { active: false, message: "" },
+    success: { active: false, message: "" },
+    subreddits: [],
+    subreddit: null,
   },
   mutations: {
-    // sync
     setModal(state, payload) {
       state.modal = payload;
     },
@@ -17,9 +19,23 @@ export default createStore({
     },
     setError(state, payload) {
       state.error = payload;
+      state.error.success = false;
     },
     closeError(state) {
       state.error.active = false;
+    },
+    setSuccess(state, payload) {
+      state.success = payload;
+      state.error.active = false;
+    },
+    closeSuccess(state) {
+      state.success.active = false;
+    },
+    setSubreddits(state, payload) {
+      state.subreddits = payload;
+    },
+    setSubreddit(state, payload) {
+      state.subreddit = payload;
     },
   },
   actions,

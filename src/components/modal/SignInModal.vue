@@ -34,8 +34,8 @@ export default {
     Modal,
   },
   methods: {
-    signIn(event) {
-      event.preventDefault();
+    signIn(e) {
+      e.preventDefault();
       this.$store.dispatch("signIn", {
         username: this.username,
         password: this.password,

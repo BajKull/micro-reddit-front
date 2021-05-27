@@ -52,6 +52,62 @@ const actions = {
         commit("setError", { active: true, msg: err.response.data })
       );
   },
+  changePassword: ({ commit, state }, { password, newPassword }) => {
+    axios
+      .post(`${URL}/changePassword`, {
+        password,
+        newPassword,
+        id: state.user.id,
+      })
+      .then(() => {
+        commit("setSuccess", {
+          active: true,
+          msg: "Password successfully changed.",
+        });
+        commit("setModal", "");
+      })
+      .catch((err) =>
+        commit("setError", { active: true, msg: err.response.data })
+      );
+  },
+  changeEmail: ({ commit, state }, { email, password }) => {
+    axios
+      .post(`${URL}/changeEmail`, {
+        email,
+        password,
+        id: state.user.id,
+      })
+      .then(() => {
+        commit("setSuccess", {
+          active: true,
+          msg: "Email successfully changed.",
+        });
+        commit("setModal", "");
+      })
+      .catch((err) =>
+        commit("setError", { active: true, msg: err.response.data })
+      );
+  },
+  getSubreddits: ({ commit }) => {
+    axios
+      .get(`${URL}/subreddits`)
+      .then((res) => {
+        commit("setSubreddits", res.data);
+      })
+      .catch((err) =>
+        commit("setError", { active: true, msg: err.response.data })
+      );
+  },
+  getSubreddit: ({ commit }, { subreddit }) => {
+    axios
+      .get(`${URL}/subreddit/${subreddit}`)
+      .then((res) => {
+        commit("setSubreddit", res.data);
+      })
+      .catch((err) =>
+        commit("setError", { active: true, msg: err.response.data })
+      );
+  },
 };
 
 export default actions;

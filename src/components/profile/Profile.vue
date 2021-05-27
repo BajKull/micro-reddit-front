@@ -12,17 +12,22 @@
       </div>
       <div class="section">
         <label class="sectionTitle" for="=email">Email</label>
-        <input
-          class="mainInputDarker"
-          name="email"
-          readonly
-          :value="user.email"
-        />
+        <div>
+          <input
+            class="mainInputDarker"
+            name="email"
+            readonly
+            :value="user.email"
+          />
+          <button class="mainButton" @click="changeEmail">Change email</button>
+        </div>
       </div>
       <div class="section">
         <h2 class="sectionTitle">Security</h2>
         <p>You can change your password by pressing the button below.</p>
-        <button class="mainSubmit">Change password</button>
+        <button class="mainSubmit" @click="changePassword">
+          Change password
+        </button>
       </div>
     </div>
   </div>
@@ -31,10 +36,30 @@
 <script>
 export default {
   name: "Profile",
+  methods: {
+    changeEmail() {
+      this.$store.commit("setModal", "changeEmail");
+    },
+    changePassword() {
+      this.$store.commit("setModal", "changePassword");
+    },
+    reRoute() {
+      if (this.$store.state.user === "noUser") {
+        this.$store.commit("setModal", "signIn");
+        this.$router.push("/");
+      }
+    },
+  },
   computed: {
     user() {
       return this.$store.state.user;
     },
+  },
+  mounted: function() {
+    this.reRoute();
+  },
+  updated: function() {
+    this.reRoute();
   },
 };
 </script>
@@ -64,9 +89,14 @@ export default {
       margin-bottom: 10px;
     }
 
+    .mainInputDarker {
+      width: 280px;
+      margin-right: 25px;
+    }
+
     .mainSubmit {
       margin: 10px 0;
-      max-width: 250px;
+      max-width: 300px;
     }
   }
 }

@@ -1,9 +1,9 @@
 <template>
   <transition name="fromBottom">
-    <div class="error" v-if="error.active">
+    <div class="success" v-if="success.active">
       <div class="content">
-        <Icon iconName="close" class="close" @click="closeError" />
-        <p class="errorMsg">{{ error.msg }}</p>
+        <Icon iconName="close" class="close" @click="closeSuccess" />
+        <p class="successMsg">{{ success.msg }}</p>
       </div>
     </div>
   </transition>
@@ -15,13 +15,13 @@ export default {
   name: "Error",
   components: { Icon },
   computed: {
-    error() {
-      return this.$store.state.error;
+    success() {
+      return this.$store.state.success;
     },
   },
   methods: {
-    closeError() {
-      this.$store.commit("closeError");
+    closeSuccess() {
+      this.$store.commit("closeSuccess");
     },
   },
 };
@@ -29,13 +29,13 @@ export default {
 
 <style lang="scss">
 @import "@/scss/_colors.scss";
-.error {
+.success {
   position: absolute;
   z-index: 999;
   bottom: 50px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: $error;
+  background-color: $success;
   border-radius: 3px;
   .content {
     position: relative;
@@ -51,7 +51,7 @@ export default {
       stroke: white;
     }
 
-    .errorMsg {
+    .successMsg {
       color: white;
     }
   }
