@@ -2,7 +2,9 @@
   <transition name="fromBottom">
     <div class="success" v-if="success.active">
       <div class="content">
-        <Icon iconName="close" class="close" @click="closeSuccess" />
+        <div class="closeContainer" @click="closeSuccess">
+          <Icon iconName="close" />
+        </div>
         <p class="successMsg">{{ success.msg }}</p>
       </div>
     </div>
@@ -30,7 +32,7 @@ export default {
 <style lang="scss">
 @import "@/scss/_colors.scss";
 .success {
-  position: absolute;
+  position: fixed;
   z-index: 999;
   bottom: 50px;
   left: 50%;
@@ -41,10 +43,14 @@ export default {
     position: relative;
     padding: 15px 35px;
 
-    .close {
+    .closeContainer {
       position: absolute;
       top: 5px;
       right: 5px;
+      width: 16px;
+      height: 16px;
+    }
+    .close {
       width: 16px;
       height: 16px;
       cursor: pointer;

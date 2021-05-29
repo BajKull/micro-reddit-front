@@ -1,7 +1,7 @@
 <template>
   <Modal>
     <h1>Sign In</h1>
-    <form @submit="signIn">
+    <form @submit="signIn" class="mainForm">
       <label for="username">Username</label>
       <input class="mainInput" v-model="username" type="text" name="username" />
       <label for="password">Password</label>

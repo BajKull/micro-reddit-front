@@ -1,7 +1,7 @@
 <template>
   <Modal>
     <h1>Sign up</h1>
-    <form @submit="signUp">
+    <form @submit="signUp" class="mainForm">
       <label for="username">Username</label>
       <input
         class="mainInput"

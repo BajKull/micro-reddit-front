@@ -19,7 +19,7 @@ export default createStore({
     },
     setError(state, payload) {
       state.error = payload;
-      state.error.success = false;
+      state.success.active = false;
     },
     closeError(state) {
       state.error.active = false;
@@ -36,6 +36,30 @@ export default createStore({
     },
     setSubreddit(state, payload) {
       state.subreddit = payload;
+    },
+    addSubreddit(state, payload) {
+      state.subreddits.push(payload);
+    },
+    likePost(state, payload) {
+      const { value, postId } = payload;
+      const post = state.subreddit.find((p) => p.id === postId);
+      const postIndex = state.subreddit.findIndex((p) => p.id === postId);
+      const votes = parseInt(state.subreddit[postIndex].votes);
+      if (post.voted === value) {
+        state.subreddit[postIndex].voted = 0;
+        if (value === 1) state.subreddit[postIndex].votes = votes - 1;
+        else state.subreddit[postIndex].votes = votes + 1;
+      } else {
+        if (value === 1) {
+          console.log(post.voted, post.voted === -1, post.voted == -1);
+          if (post.voted === -1) state.subreddit[postIndex].votes = votes + 2;
+          else state.subreddit[postIndex].votes = votes + 1;
+        } else {
+          if (post.voted === 1) state.subreddit[postIndex].votes = votes - 2;
+          else state.subreddit[postIndex].votes = votes - 1;
+        }
+        state.subreddit[postIndex].voted = value;
+      }
     },
   },
   actions,

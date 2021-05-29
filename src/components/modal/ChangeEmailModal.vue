@@ -1,7 +1,7 @@
 <template>
   <Modal>
     <h1>Change email</h1>
-    <form @submit="change">
+    <form @submit="change" class="mainForm">
       <label for="password">Current password</label>
       <input
         class="mainInput"

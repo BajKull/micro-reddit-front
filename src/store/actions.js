@@ -12,6 +12,7 @@ const actions = {
         })
         .catch(() => {
           localStorage.removeItem("sessionID");
+          commit("setUser", "noUser");
         });
     } else commit("setUser", "noUser");
   },
@@ -98,12 +99,76 @@ const actions = {
         commit("setError", { active: true, msg: err.response.data })
       );
   },
-  getSubreddit: ({ commit }, { subreddit }) => {
+  getSubreddit: ({ commit, state }, { subreddit }) => {
     axios
-      .get(`${URL}/subreddit/${subreddit}`)
-      .then((res) => {
-        commit("setSubreddit", res.data);
+      .get(`${URL}/subreddit/${subreddit}`, {
+        params: { user: state.user ? state.user.id : null },
       })
+      .then((res) => {
+        if (res.data[0].id === null) commit("setSubreddit", []);
+        else commit("setSubreddit", res.data);
+      })
+      .catch((err) =>
+        commit("setError", { active: true, msg: err.response.data })
+      );
+  },
+  createSubreddit: ({ commit, state }, { name, desc, router }) => {
+    const user = state.user.id;
+    axios
+      .post(`${URL}/createSubreddit`, { name, desc, user })
+      .then((res) => {
+        commit("addSubreddit", res.data);
+        commit("setSuccess", {
+          active: true,
+          msg: "Subreddit successfully created.",
+        });
+        router.push(`/r/${name}`);
+      })
+      .catch((err) => {
+        commit("setError", { active: true, msg: err.response.data });
+        console.log(err);
+      });
+  },
+  createPost: (
+    { commit, state },
+    { name, content, image, video, survey, subredditId, router }
+  ) => {
+    const data = {
+      name,
+      content,
+      image,
+      video,
+      survey,
+      subredditId,
+      userId: state.user.id,
+    };
+    axios
+      .post(`${URL}/createPost`, { data })
+      .then((res) => {
+        console.log(router, res);
+        commit("setSuccess", {
+          active: true,
+          msg: "Post successfully created.",
+        });
+        router.push(`/r/${name}`);
+      })
+      .catch((err) => {
+        commit("setError", { active: true, msg: err.response.data });
+      });
+  },
+  likePost: ({ commit, state }, { value, postId }) => {
+    const userId = state.user.id;
+    const data = { value, postId, userId };
+    if (!userId) {
+      commit("setError", {
+        active: true,
+        msg: "In order to vote post, you need to be signed in.",
+      });
+      return;
+    }
+    commit("likePost", { value, postId });
+    axios
+      .post(`${URL}/likePost`, { data })
       .catch((err) =>
         commit("setError", { active: true, msg: err.response.data })
       );

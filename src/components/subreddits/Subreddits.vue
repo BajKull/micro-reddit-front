@@ -2,23 +2,29 @@
   <div class="subreddits">
     <div class="subredditsInfo">
       <h1 class="subredditsTitle">Subreddits</h1>
-      <button class="mainButton">Create subreddit</button>
+      <router-link to="/r/CreateSubreddit" class="mainButton"
+        >Create subreddit</router-link
+      >
     </div>
-    <router-link
-      :to="`/r/${subreddit.name}`"
-      class="subreddit"
-      v-for="subreddit in $store.state.subreddits"
-      :key="subreddit.id"
-    >
-      <div class="subredditAvatar">
-        <p>{{ subreddit.name[0] }}</p>
-      </div>
-      <div class="subredditInfo">
-        <h2 class="subredditTitle">{{ subreddit.name }}</h2>
-        <p class="subredditDesc">{{ subreddit.description }}</p>
-        <p class="subredditUsers">{{ subreddit.users }} users</p>
-      </div>
-    </router-link>
+    <div class="content">
+      <router-link
+        :to="`/r/${subreddit.name}`"
+        class="subreddit"
+        v-for="subreddit in $store.state.subreddits"
+        :key="subreddit.id"
+      >
+        <div class="subredditAvatar">
+          <p>{{ subreddit.name[0] }}</p>
+        </div>
+        <div class="subredditInfo">
+          <h2 class="subredditTitle">{{ subreddit.name }}</h2>
+          <p class="subredditDesc">{{ subreddit.description }}</p>
+          <p class="subredditUsers">
+            {{ subreddit.users }} user{{ subreddit.users > 1 ? "s" : "" }}
+          </p>
+        </div>
+      </router-link>
+    </div>
   </div>
 </template>
 
@@ -37,7 +43,7 @@ export default {
   display: flex;
   flex-direction: column;
   width: 90%;
-  margin: 25px auto 0;
+  margin: auto 0;
   padding: 25px 5%;
   min-height: 100vh;
   background-color: $gray;
@@ -57,6 +63,11 @@ export default {
       position: absolute;
       right: 0;
     }
+  }
+
+  .content {
+    width: 60%;
+    margin: auto;
   }
 
   .subreddit {
@@ -81,7 +92,7 @@ export default {
       }
 
       .subredditDesc {
-        margin-bottom: 5px;
+        margin-bottom: 10px;
       }
 
       .subredditUsers {
@@ -94,10 +105,11 @@ export default {
   .subredditAvatar {
     position: relative;
     font-size: 3em;
-    width: 85px;
-    height: 85px;
+    min-width: 85px;
+    min-height: 85px;
     border-radius: 50%;
-    background-color: $secondary;
+    background-color: $darkMain;
+    color: white;
     margin-right: 30px;
     p {
       line-height: 0;

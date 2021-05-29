@@ -26,11 +26,35 @@ const routes = [
       ),
   },
   {
+    path: "/r/createSubreddit",
+    name: "CreateSubreddit",
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "@/components/subreddits/CreateSubreddit.vue"
+      ),
+  },
+  {
     path: "/r/:id",
     name: "Subreddit",
     component: () =>
       import(
         /* webpackChunkName: "about" */ "@/components/subreddits/Subreddit.vue"
+      ),
+  },
+  {
+    path: "/r/:id/:postId",
+    name: "SubredditPost",
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "@/components/subreddits/Post.vue"
+      ),
+  },
+  {
+    path: "/r/:id/createPost",
+    name: "CreatePost",
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "@/components/subreddits/CreatePost.vue"
       ),
   },
 ];

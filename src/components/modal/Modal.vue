@@ -1,7 +1,9 @@
 <template>
   <div class="modal" @mousedown="close">
     <div class="content">
-      <Icon class="close" iconName="close" @click="close" />
+      <div class="closeContainer" @click="close">
+        <Icon iconName="close" />
+      </div>
       <slot />
     </div>
   </div>
@@ -18,7 +20,7 @@ export default {
     close(e) {
       if (
         e.target.classList.contains("modal") ||
-        e.target.classList.contains("close")
+        e.currentTarget.classList.contains("closeContainer")
       )
         this.$store.commit("setModal", "");
     },
@@ -30,7 +32,7 @@ export default {
 @import "@/scss/_colors.scss";
 @import "@/scss/_inputs.scss";
 .modal {
-  position: absolute;
+  position: fixed;
   width: 100%;
   min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.75);
@@ -39,6 +41,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 50;
 
   .content {
     position: relative;
@@ -54,17 +57,6 @@ export default {
       margin-bottom: 15px;
     }
 
-    form {
-      display: flex;
-      flex-direction: column;
-
-      label {
-        text-align: left;
-        margin-bottom: 5px;
-        font-weight: 600;
-      }
-    }
-
     .underline {
       text-decoration: underline;
       cursor: pointer;
@@ -75,13 +67,17 @@ export default {
       }
     }
   }
+  .closeContainer {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 24px;
+    height: 24px;
+  }
   .close {
     width: 24px;
     height: 24px;
     stroke: black;
-    position: absolute;
-    top: 15px;
-    right: 15px;
     cursor: pointer;
   }
 }

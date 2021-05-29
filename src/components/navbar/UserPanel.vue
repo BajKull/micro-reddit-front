@@ -33,6 +33,7 @@ export default {
   background: white;
   border: 2px solid $gray;
   padding: 5px 0;
+  z-index: 100;
 
   .userPanelEl {
     display: block;
