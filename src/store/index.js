@@ -61,6 +61,12 @@ export default createStore({
         state.subreddit[postIndex].voted = value;
       }
     },
+    joinSubreddit(state, payload) {
+      const { subredditId } = payload;
+      const index = state.user.subreddits.indexOf(subredditId);
+      if (index !== -1) state.user.subreddits.splice(index, 1);
+      else state.user.subreddits.push(subredditId);
+    },
   },
   actions,
   modules: {},

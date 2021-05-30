@@ -20,6 +20,7 @@ const actions = {
     axios
       .post(`${URL}/signIn`, { username, password })
       .then((res) => {
+        console.log(res.data.user);
         localStorage.setItem("sessionID", res.data.sessionID);
         commit("setUser", res.data.user);
         commit("setModal", "");
@@ -172,6 +173,21 @@ const actions = {
       .catch((err) =>
         commit("setError", { active: true, msg: err.response.data })
       );
+  },
+  joinSubreddit: ({ commit, state }, { subredditId }) => {
+    const userId = state.user.id;
+    commit("joinSubreddit", { subredditId });
+    axios.post(`${URL}/joinSubreddit`, { subredditId, userId });
+  },
+  getLanding: ({ commit, state }, { sort }) => {
+    axios
+      .get(`${URL}/getLanding`, {
+        params: { userId: state.user.id || null, sort },
+      })
+      .then((res) => commit("setSubreddit", res.data))
+      .catch((err) => {
+        commit("setError", { active: true, msg: err.response.data });
+      });
   },
 };
 

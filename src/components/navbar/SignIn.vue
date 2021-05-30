@@ -7,7 +7,7 @@
     Sign in
   </button>
   <button class="mainButton" v-else @click="showPanel">
-    {{ $store.state.user.nickname }}
+    {{ $store.state.user.username }}
   </button>
 </template>
 

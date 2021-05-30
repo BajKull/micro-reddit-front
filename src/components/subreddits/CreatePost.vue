@@ -49,7 +49,12 @@
           Add answer
         </button>
       </div>
-      <input type="submit" class="mainSubmit" />
+      <div class="actions">
+        <router-link :to="`/r/${subreddit}`" class="cancelButton"
+          >Cancel</router-link
+        >
+        <input type="submit" class="mainSubmit" />
+      </div>
     </form>
   </div>
 </template>
@@ -256,6 +261,21 @@ export default {
       .remove {
         width: 100%;
         height: 100%;
+      }
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 25px;
+      .mainSubmit,
+      .cancelButton {
+        margin: 0 10px;
+        width: 150px;
+        padding: 10px 25px;
+      }
+      .cancelButton {
+        width: 100px;
       }
     }
   }

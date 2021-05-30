@@ -35,4 +35,8 @@ export default {
   padding: 0;
   font-family: "Nunito", sans-serif;
 }
+
+button {
+  font-weight: 600;
+}
 </style>

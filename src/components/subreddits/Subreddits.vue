@@ -7,33 +7,16 @@
       >
     </div>
     <div class="content">
-      <router-link
-        :to="`/r/${subreddit.name}`"
-        class="subreddit"
-        v-for="subreddit in $store.state.subreddits"
-        :key="subreddit.id"
-      >
-        <div class="subredditAvatar">
-          <p>{{ subreddit.name[0] }}</p>
-        </div>
-        <div class="subredditInfo">
-          <h2 class="subredditTitle">{{ subreddit.name }}</h2>
-          <p class="subredditDesc">{{ subreddit.description }}</p>
-          <p class="subredditUsers">
-            {{ subreddit.users }} user{{ subreddit.users > 1 ? "s" : "" }}
-          </p>
-        </div>
-      </router-link>
+      <SubredditsList />
     </div>
   </div>
 </template>
 
 <script>
+import SubredditsList from "./SubredditsList";
 export default {
   name: "Subreddits",
-  beforeMount: function() {
-    this.$store.dispatch("getSubreddits");
-  },
+  components: { SubredditsList },
 };
 </script>
 
@@ -69,7 +52,6 @@ export default {
     width: 60%;
     margin: auto;
   }
-
   .subreddit {
     display: flex;
     align-items: center;
@@ -79,6 +61,7 @@ export default {
     transition: background-color 0.2s;
     text-decoration: none;
     color: inherit;
+    border-radius: 5px;
     &:hover {
       background-color: darken($gray, 10);
     }
