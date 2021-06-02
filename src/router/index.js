@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 const routes = [
   {
     path: "/",
-    name: "LandingView",
+    name: "Landing",
     component: () =>
       import(
         /* webpackChunkName: "Landing" */ "@/components/landing/Landing.vue"
@@ -56,6 +56,12 @@ const routes = [
       import(
         /* webpackChunkName: "about" */ "@/components/subreddits/CreatePost.vue"
       ),
+  },
+  {
+    path: "/search/:id",
+    name: "Search",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "@/components/search/Search.vue"),
   },
 ];
 

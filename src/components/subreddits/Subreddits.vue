@@ -1,5 +1,5 @@
 <template>
-  <div class="subreddits">
+  <div class="subredditsList">
     <div class="subredditsInfo">
       <h1 class="subredditsTitle">Subreddits</h1>
       <router-link to="/r/CreateSubreddit" class="mainButton"
@@ -22,7 +22,7 @@ export default {
 
 <style lang="scss">
 @import "@/scss/_colors.scss";
-.subreddits {
+.subredditsList {
   display: flex;
   flex-direction: column;
   width: 90%;
@@ -51,55 +51,55 @@ export default {
   .content {
     width: 60%;
     margin: auto;
-  }
-  .subreddit {
-    display: flex;
-    align-items: center;
-    margin-bottom: 25px;
-    padding: 15px 30px;
-    background-color: darken($gray, 5);
-    transition: background-color 0.2s;
-    text-decoration: none;
-    color: inherit;
-    border-radius: 5px;
-    &:hover {
-      background-color: darken($gray, 10);
-    }
-
-    .subredditInfo {
+    .subreddit {
       display: flex;
-      flex-direction: column;
-      .subredditTitle {
-        margin-bottom: 10px;
-        font-size: 1.75em;
+      align-items: center;
+      margin-bottom: 25px;
+      padding: 15px 30px;
+      background-color: darken($gray, 5);
+      transition: background-color 0.2s;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 5px;
+      &:hover {
+        background-color: darken($gray, 10);
       }
 
-      .subredditDesc {
-        margin-bottom: 10px;
-      }
+      .subredditInfo {
+        display: flex;
+        flex-direction: column;
+        .subredditTitle {
+          margin-bottom: 10px;
+          font-size: 1.75em;
+        }
 
-      .subredditUsers {
-        font-size: 0.8em;
-        color: darken($gray, 30);
+        .subredditDesc {
+          margin-bottom: 10px;
+        }
+
+        .subredditUsers {
+          font-size: 0.8em;
+          color: darken($gray, 30);
+        }
       }
     }
-  }
 
-  .subredditAvatar {
-    position: relative;
-    font-size: 3em;
-    min-width: 85px;
-    min-height: 85px;
-    border-radius: 50%;
-    background-color: $darkMain;
-    color: white;
-    margin-right: 30px;
-    p {
-      line-height: 0;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translateX(-50%) translateY(-50%);
+    .subredditAvatar {
+      position: relative;
+      font-size: 3em;
+      min-width: 85px;
+      min-height: 85px;
+      border-radius: 50%;
+      background-color: $darkMain;
+      color: white;
+      margin-right: 30px;
+      p {
+        line-height: 0;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      }
     }
   }
 }

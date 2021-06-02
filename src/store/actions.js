@@ -90,9 +90,26 @@ const actions = {
         commit("setError", { active: true, msg: err.response.data })
       );
   },
-  getSubreddits: ({ commit }) => {
+  getSubreddits: ({ commit, state, dispatch }, { sort }) => {
+    if (!state.user || state.user === "noUser") {
+      dispatch("getSubredditsAll", { sort });
+      return;
+    }
     axios
-      .get(`${URL}/subreddits`)
+      .get(`${URL}/subreddits`, {
+        params: { user: state.user?.id || null, sort },
+      })
+      .then((res) => {
+        console.log(res);
+        commit("setSubreddits", res.data);
+      })
+      .catch((err) =>
+        commit("setError", { active: true, msg: err.response.data })
+      );
+  },
+  getSubredditsAll: ({ commit }, { sort }) => {
+    axios
+      .get(`${URL}/subredditsAll`, { params: { sort } })
       .then((res) => {
         commit("setSubreddits", res.data);
       })
@@ -100,18 +117,15 @@ const actions = {
         commit("setError", { active: true, msg: err.response.data })
       );
   },
-  getSubreddit: ({ commit, state }, { subreddit }) => {
+  getSubreddit: ({ commit, state }, { subreddit, sort }) => {
     axios
       .get(`${URL}/subreddit/${subreddit}`, {
-        params: { user: state.user ? state.user.id : null },
+        params: { user: state.user ? state.user.id : null, sort },
       })
       .then((res) => {
-        if (res.data[0].id === null) commit("setSubreddit", []);
-        else commit("setSubreddit", res.data);
+        commit("setSubreddit", res.data);
       })
-      .catch((err) =>
-        commit("setError", { active: true, msg: err.response.data })
-      );
+      .catch((err) => console.log(err));
   },
   createSubreddit: ({ commit, state }, { name, desc, router }) => {
     const user = state.user.id;
@@ -185,6 +199,29 @@ const actions = {
         params: { userId: state.user.id || null, sort },
       })
       .then((res) => commit("setSubreddit", res.data))
+      .catch((err) => {
+        commit("setError", { active: true, msg: err.response.data });
+      });
+  },
+  getSearch: ({ commit }, { sortPosts, sortSubreddits, search }) => {
+    axios
+      .get(`${URL}/getSearch`, {
+        params: { search, sortPosts, sortSubreddits },
+      })
+      .then((res) => {
+        commit("setSubreddit", res.data.posts);
+        commit("setSubreddits", res.data.subreddits);
+      })
+      .catch((err) => {
+        commit("setError", { active: true, msg: err.response.data });
+      });
+  },
+  getPost: ({ commit }, { postId }) => {
+    axios
+      .get(`${URL}/getPost`, { params: { postId } })
+      .then((res) => {
+        commit("setPost", res.data);
+      })
       .catch((err) => {
         commit("setError", { active: true, msg: err.response.data });
       });

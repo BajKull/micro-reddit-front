@@ -1,6 +1,7 @@
 <template>
   <div class="navbar">
     <router-link to="/">Home</router-link>
+    <SearchBox />
     <SignIn @showPanel="showPanel" />
     <UserPanel
       @showPanel="showPanel"
@@ -12,6 +13,7 @@
 <script>
 import SignIn from "./SignIn";
 import UserPanel from "./UserPanel";
+import SearchBox from "./SearchBox";
 
 export default {
   data() {
@@ -20,7 +22,7 @@ export default {
     };
   },
   name: "Navbar",
-  components: { SignIn, UserPanel },
+  components: { SignIn, UserPanel, SearchBox },
   methods: {
     showPanel(val) {
       this.panel = val;

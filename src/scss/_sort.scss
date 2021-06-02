@@ -1,0 +1,63 @@
+.sort {
+  width: calc(100% - 100px);
+  background-color: white;
+  min-width: 400px;
+  padding: 15px 50px;
+  border-radius: 5px;
+  margin: auto;
+  margin-bottom: 25px;
+  display: flex;
+
+  .active {
+    background: $main;
+    color: white;
+
+    &:hover {
+      background: darken($main, 5);
+    }
+  }
+
+  .views {
+    display: flex;
+    margin-left: auto;
+
+    .cardContainer,
+    .listContainer {
+      max-height: 30px;
+      max-width: 30px;
+      cursor: pointer;
+      margin-left: 15px;
+
+      svg {
+        height: 100%;
+        width: 100%;
+        fill: $gray;
+        transition: fill 0.2s;
+        &:hover {
+          fill: darken($gray, 5);
+        }
+      }
+    }
+
+    .active {
+      background: 0;
+      svg {
+        fill: $main;
+      }
+    }
+  }
+
+  button {
+    border-radius: 500px;
+    border: 0;
+    padding: 5px 15px;
+    background: $gray;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background: darken($gray, 5);
+    }
+  }
+}

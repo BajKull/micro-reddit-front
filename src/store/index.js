@@ -8,7 +8,10 @@ export default createStore({
     error: { active: false, message: "" },
     success: { active: false, message: "" },
     subreddits: [],
-    subreddit: null,
+    subreddit: [],
+    sortPosts: localStorage.getItem("sort") || "sort1",
+    sortSubreddits: localStorage.getItem("subredditSort") || "sort1",
+    post: { commentList: [] },
   },
   mutations: {
     setModal(state, payload) {
@@ -20,6 +23,18 @@ export default createStore({
     setError(state, payload) {
       state.error = payload;
       state.success.active = false;
+    },
+    setSortPosts(state, payload) {
+      state.sortPosts = payload;
+    },
+    setPost(state, payload) {
+      state.post = payload;
+    },
+    addComment(state, payload) {
+      state.post.commentList.unshift(payload);
+    },
+    setSortSubreddits(state, payload) {
+      state.sortSubreddits = payload;
     },
     closeError(state) {
       state.error.active = false;

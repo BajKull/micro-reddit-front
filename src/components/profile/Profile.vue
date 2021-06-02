@@ -7,7 +7,7 @@
           class="mainInputDarker"
           name="username"
           readonly
-          :value="user.nickname"
+          :value="user.username"
         />
       </div>
       <div class="section">

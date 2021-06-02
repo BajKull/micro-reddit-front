@@ -56,6 +56,11 @@
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;
+
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 1px $main inset;
+  }
 }
 
 .mainInputDarker {

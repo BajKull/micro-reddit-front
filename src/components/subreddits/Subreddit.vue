@@ -27,7 +27,9 @@
     <h2 class="subredditEmpty" v-if="posts && posts.length === 0">
       There are no posts in this subreddit.
     </h2>
-    <PostsOverview />
+    <div class="postsList">
+      <PostsOverview />
+    </div>
   </div>
 </template>
 
@@ -35,10 +37,6 @@
 import PostsOverview from "./PostsOverview";
 export default {
   name: "Subreddit",
-  beforeCreate: function() {
-    const route = this.$route.params.id;
-    this.$store.dispatch("getSubreddit", { subreddit: route });
-  },
   methods: {
     create() {
       const route = this.$route.params.id;
@@ -61,6 +59,7 @@ export default {
       return this.$store.state.user;
     },
   },
+
   components: { PostsOverview },
 };
 </script>
@@ -79,6 +78,11 @@ export default {
   .subredditEmpty {
     text-align: center;
     margin-top: 50px;
+  }
+
+  .postsList {
+    width: calc(30% + 100px);
+    margin: auto;
   }
 
   .create {

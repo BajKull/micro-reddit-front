@@ -6,6 +6,15 @@
         personalized posts!
       </p>
       <PostsOverview />
+      <div
+        v-if="$store.state.subreddit.length === 0"
+        class="landingPersonalized"
+      >
+        <p>
+          There are no posts to show. <br />In order to see more posts join more
+          <router-link to="/r" class="mainButton">subreddits</router-link>
+        </p>
+      </div>
     </div>
     <div class="subreddits">
       <div class="info">
@@ -46,6 +55,7 @@ export default {
   display: flex;
   justify-content: center;
   width: 100%;
+  min-height: calc(100vh - 60px);
 
   .posts {
     width: 30%;

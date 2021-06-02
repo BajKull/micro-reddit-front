@@ -5,6 +5,7 @@
   <Remove v-if="iconName === 'remove'" />
   <Card v-if="iconName === 'card'" />
   <List v-if="iconName === 'list'" />
+  <Search v-if="iconName === 'search'" />
 </template>
 
 <script>
@@ -14,6 +15,7 @@ import ArrowDown from "./ArrowDown";
 import Remove from "./Remove";
 import Card from "./Card";
 import List from "./List";
+import Search from "./Search";
 export default {
   name: "Icon",
   props: {
@@ -22,7 +24,7 @@ export default {
       type: String,
     },
   },
-  components: { Close, ArrowUp, ArrowDown, Remove, Card, List },
+  components: { Close, ArrowUp, ArrowDown, Remove, Card, List, Search },
 };
 </script>
 
