@@ -42,6 +42,14 @@ const routes = [
       ),
   },
   {
+    path: "/r/:id/edit",
+    name: "SubredditManage",
+    component: () =>
+      import(
+        /* webpackChunkName: "about" */ "@/components/subreddits/SubredditManage.vue"
+      ),
+  },
+  {
     path: "/r/:id/:postId",
     name: "SubredditPost",
     component: () =>

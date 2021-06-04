@@ -1,5 +1,7 @@
 import { createStore } from "vuex";
 import actions from "./actions";
+import { io } from "socket.io-client";
+const socket = io("http://localhost:5050");
 
 export default createStore({
   state: {
@@ -12,6 +14,7 @@ export default createStore({
     sortPosts: localStorage.getItem("sort") || "sort1",
     sortSubreddits: localStorage.getItem("subredditSort") || "sort1",
     post: { commentList: [] },
+    socket,
   },
   mutations: {
     setModal(state, payload) {
@@ -81,6 +84,14 @@ export default createStore({
       const index = state.user.subreddits.indexOf(subredditId);
       if (index !== -1) state.user.subreddits.splice(index, 1);
       else state.user.subreddits.push(subredditId);
+    },
+    deletePost(state, payload) {
+      state.subreddit = state.subreddit.filter((p) => p.id !== payload.id);
+    },
+    deleteComment(state, payload) {
+      state.post.commentList = state.post.commentList.filter(
+        (c) => c.id !== payload.id
+      );
     },
   },
   actions,

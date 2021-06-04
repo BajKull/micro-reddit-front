@@ -159,13 +159,12 @@ const actions = {
     };
     axios
       .post(`${URL}/createPost`, { data })
-      .then((res) => {
-        console.log(router, res);
+      .then(() => {
         commit("setSuccess", {
           active: true,
           msg: "Post successfully created.",
         });
-        router.push(`/r/${name}`);
+        router.push(`/r/${subredditId}`);
       })
       .catch((err) => {
         commit("setError", { active: true, msg: err.response.data });
@@ -187,6 +186,12 @@ const actions = {
       .catch((err) =>
         commit("setError", { active: true, msg: err.response.data })
       );
+  },
+  deletePost: ({ commit, state }, { id, path, subredditName }) => {
+    const user = state.user;
+    if (!user && user === "noUser") return;
+    state.socket.emit("deletePost", { user, id, path, subredditName });
+    commit("deletePost", { id });
   },
   joinSubreddit: ({ commit, state }, { subredditId }) => {
     const userId = state.user.id;
@@ -223,6 +228,23 @@ const actions = {
         commit("setPost", res.data);
       })
       .catch((err) => {
+        commit("setError", { active: true, msg: err.response.data });
+      });
+  },
+  subredditEdit: ({ commit, state }, { router, subredditId, description }) => {
+    const user = state.user.id;
+    if (!user) return;
+    axios
+      .post(`${URL}/subredditEdit`, { user, subredditId, description })
+      .then(() => {
+        commit("setSuccess", {
+          active: true,
+          msg: "Subreddit successfully updated.",
+        });
+        router.push(`/r/${subredditId}`);
+      })
+      .catch((err) => {
+        console.log(err);
         commit("setError", { active: true, msg: err.response.data });
       });
   },

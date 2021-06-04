@@ -40,9 +40,9 @@ export default {
         );
         return;
       }
-      if (this.desc.length > 300) {
+      if (this.desc.length > 200) {
         this.setError(
-          "Subreddit description can't be longer than 300 characters."
+          "Subreddit description can't be longer than 200 characters."
         );
         return;
       }

@@ -2,6 +2,15 @@
   <div class="subredditList">
     <div class="subredditInfo">
       <h1 class="subredditTitle">{{ $route.params.id }}</h1>
+      <router-link
+        v-if="
+          user && user !== 'noUser' && user.moderator.includes($route.params.id)
+        "
+        class="secondaryButton subredditManage"
+        :to="`/r/${$route.params.id}/edit`"
+      >
+        Manage
+      </router-link>
       <button
         v-if="user && user !== 'noUser'"
         :class="
@@ -61,6 +70,15 @@ export default {
   },
 
   components: { PostsOverview },
+
+  mounted: function() {
+    const path = this.$route.fullPath;
+    this.$store.state.socket.emit("joinRoom", { path });
+  },
+  onUnmounted: function() {
+    const path = this.$route.fullPath;
+    this.$store.state.socket.emit("leaveRoom", { path });
+  },
 };
 </script>
 
@@ -103,6 +121,15 @@ export default {
     position: relative;
     margin-bottom: 50px;
     align-items: center;
+
+    .subredditManage {
+      display: block;
+      position: absolute;
+      right: 100px;
+      left: initial;
+      width: 50px;
+      text-align: center;
+    }
 
     .titleContainer {
       position: relative;

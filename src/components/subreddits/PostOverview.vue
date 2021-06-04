@@ -14,6 +14,12 @@
       <Icon iconName="arrowDown" />
     </div>
   </div>
+  <div
+    class="postDelete"
+    v-if="user && user !== 'noUser' && user.moderator.includes(post.name)"
+  >
+    <button class="deleteBtn" @click="deletePost">Delete post</button>
+  </div>
   <router-link class="content" :to="`/r/${post.name}/${post.id}`">
     <p class="date">Posted {{ getDate(post.creation_date) }}</p>
     <h2 class="postTitle">{{ post.title }}</h2>
@@ -50,6 +56,18 @@ export default {
     like(event, value, postId) {
       event.stopPropagation();
       this.$store.dispatch("likePost", { value, postId });
+    },
+    deletePost() {
+      this.$store.dispatch("deletePost", {
+        id: this.post.id,
+        subredditName: this.post.name,
+        path: this.$route.fullPath,
+      });
+    },
+  },
+  computed: {
+    user() {
+      return this.$store.state.user;
     },
   },
 };
@@ -146,6 +164,23 @@ export default {
     .disliked {
       .arrowDown {
         fill: $error;
+      }
+    }
+  }
+
+  .postDelete {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    .deleteBtn {
+      padding: 10px 25px;
+      color: white;
+      border-radius: 5px;
+      background: $error;
+      border: 0;
+      cursor: pointer;
+      &:hover {
+        background: darken($error, 5);
       }
     }
   }

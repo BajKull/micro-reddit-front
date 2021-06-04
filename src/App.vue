@@ -3,6 +3,7 @@
   <ModalContainer />
   <Error />
   <Success />
+  <Socket />
   <router-view />
 </template>
 
@@ -11,6 +12,7 @@ import Navbar from "@/components/navbar/Navbar.vue";
 import ModalContainer from "@/components/modal/ModalContainer";
 import Error from "@/components/modal/Error";
 import Success from "@/components/modal/Success";
+import Socket from "@/components/socket/Socket";
 
 export default {
   name: "App",
@@ -19,6 +21,7 @@ export default {
     ModalContainer,
     Error,
     Success,
+    Socket,
   },
   beforeMount: function() {
     this.$store.dispatch("initAuth");

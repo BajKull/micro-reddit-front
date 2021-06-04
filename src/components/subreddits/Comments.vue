@@ -18,8 +18,6 @@
 </template>
 
 <script>
-import { io } from "socket.io-client";
-const socket = io("http://localhost:5050");
 export default {
   data() {
     return {
@@ -53,8 +51,7 @@ export default {
         nickname: user.username,
         content: this.commentText,
       });
-      console.log(user);
-      socket.emit("commentSend", {
+      this.$store.state.socket.emit("commentSend", {
         path,
         user,
         content: this.commentText,
@@ -66,16 +63,12 @@ export default {
   props: { comments: Object },
   mounted: function() {
     const path = this.$route.fullPath;
-    socket.on("connect", () => socket.emit("joinComments", { path }));
-    socket.on("commentReceive", (data) => {
-      console.log(data);
-      this.$store.commit("addComment", {
-        nickname: data.nickname,
-        content: data.content,
-      });
-    });
+    this.$store.state.socket.emit("joinRoom", { path });
   },
-  onUnmounted: function() {},
+  onUnmounted: function() {
+    const path = this.$route.fullPath;
+    this.$store.state.socket.emit("leaveRoom", { path });
+  },
 };
 </script>
 

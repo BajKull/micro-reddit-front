@@ -136,6 +136,7 @@ export default {
             }
           : null,
         subredditId: this.$route.params.id,
+        router: this.$router,
       });
     },
     addAnswer() {
