@@ -187,11 +187,12 @@ const actions = {
         commit("setError", { active: true, msg: err.response.data })
       );
   },
-  deletePost: ({ commit, state }, { id, path, subredditName }) => {
+  deletePost: ({ commit, state }, { router, id, path, subredditName }) => {
     const user = state.user;
     if (!user && user === "noUser") return;
     state.socket.emit("deletePost", { user, id, path, subredditName });
     commit("deletePost", { id });
+    router.push(`/r/${subredditName}`);
   },
   joinSubreddit: ({ commit, state }, { subredditId }) => {
     const userId = state.user.id;
@@ -247,6 +248,12 @@ const actions = {
         console.log(err);
         commit("setError", { active: true, msg: err.response.data });
       });
+  },
+  deleteComment: ({ commit, state }, { id, subredditName, path }) => {
+    const user = state.user;
+    if (!user) return;
+    state.socket.emit("deleteComment", { user, subredditName, id, path });
+    commit("deleteComment", { id });
   },
 };
 

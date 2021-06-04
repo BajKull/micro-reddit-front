@@ -11,6 +11,15 @@
       <button class="mainButton" @click="sendComment">Add comment</button>
     </div>
     <div class="comment" v-for="comment in comments" :key="comment.id">
+      <button
+        v-if="
+          user && user !== 'noUser' && user.moderator.includes($route.params.id)
+        "
+        class="deleteButton"
+        @click="deleteComment(comment.id)"
+      >
+        Delete
+      </button>
       <p class="commentAuthor">{{ comment.nickname }}</p>
       <p class="commentContent">{{ comment.content }}</p>
     </div>
@@ -59,6 +68,19 @@ export default {
       });
       this.commentText = "";
     },
+    deleteComment(id) {
+      console.log(id);
+      this.$store.dispatch("deleteComment", {
+        id,
+        subredditName: this.$route.params.id,
+        path: this.$route.fullPath,
+      });
+    },
+  },
+  computed: {
+    user() {
+      return this.$store.state.user;
+    },
   },
   props: { comments: Object },
   mounted: function() {
@@ -104,6 +126,25 @@ export default {
     background-color: $gray;
     border-radius: 5px;
     margin-bottom: 10px;
+    position: relative;
+
+    .deleteButton {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: $error;
+      padding: 5px 10px;
+      border: 0;
+      border-radius: 5px;
+      color: white;
+      transition: background-color 0.2s;
+      cursor: pointer;
+      font-size: 0.7em;
+
+      &:hover {
+        background: darken($error, 5);
+      }
+    }
 
     .commentAuthor {
       font-size: 0.85em;

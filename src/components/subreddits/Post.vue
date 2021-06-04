@@ -1,5 +1,12 @@
 <template>
   <div class="postPage">
+    <div class="info">
+      <router-link
+        class="secondaryButton goBackBtn"
+        :to="`/r/${$route.params.id}`"
+        >{{ $route.params.id }}</router-link
+      >
+    </div>
     <div class="content">
       <div class="post">
         <PostOverview :post="post" />
@@ -38,7 +45,19 @@ export default {
   min-height: 100vh;
   width: 100%;
   background-color: $gray;
+  padding: 25px 0;
 
+  .info {
+    width: 90%;
+    margin: auto;
+    position: relative;
+    margin-bottom: 50px;
+  }
+
+  .goBackBtn {
+    position: absolute;
+    left: 0;
+  }
   .content {
     padding-top: 50px;
     width: calc(30% + 100px);

@@ -13,12 +13,18 @@ export default {
         content: data.content,
       });
     });
-    socket.on("deletePost", (data) => {
-      console.log(data);
-      console.log(this.$route);
-      if (this.$route.params.postId == data.id)
+    socket.on("deletePost", ({ id }) => {
+      if (this.$route.params.postId == id) {
         this.$router.push(`/r/${this.$route.params.id}`);
-      this.$store.commit("deletePost", { id: data.id });
+        this.$store.commit("setError", {
+          active: true,
+          msg: "This post was deleted by a moderator.",
+        });
+      }
+      this.$store.commit("deletePost", { id });
+    });
+    socket.on("deleteComment", ({ id }) => {
+      this.$store.commit("deleteComment", { id });
     });
   },
 };
