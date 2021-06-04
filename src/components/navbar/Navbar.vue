@@ -39,6 +39,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/scss/_mixins.scss";
 .navbar {
   display: flex;
   margin: auto;
@@ -47,6 +48,10 @@ export default {
   align-items: center;
   position: relative;
   height: 40px;
+
+  @include breakpoint(900px) {
+    width: 90%;
+  }
 
   a {
     text-decoration: none;

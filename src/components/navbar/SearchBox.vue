@@ -37,15 +37,21 @@ export default {
 
 <style lang="scss">
 @import "@/scss/_colors.scss";
+@import "@/scss/_mixins.scss";
 .searchBox {
-  width: 50%;
+  width: calc(100% - 240px);
   display: flex;
   align-items: center;
-  margin-left: 25px;
+  margin-left: 50px;
   background-color: $gray;
   height: 38px;
   border-radius: 5px;
   position: relative;
+
+  @include breakpoint(600px) {
+    width: calc(100% - 185px);
+    margin-left: 25px;
+  }
 
   .searchContainer {
     position: absolute;

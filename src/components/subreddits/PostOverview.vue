@@ -57,11 +57,13 @@ export default {
       event.stopPropagation();
       this.$store.dispatch("likePost", { value, postId });
     },
-    deletePost() {
+    deletePost(e) {
+      e.stopPropagation();
       this.$store.dispatch("deletePost", {
         id: this.post.id,
         subredditName: this.post.name,
         path: this.$route.fullPath,
+        router: this.$router,
       });
     },
   },

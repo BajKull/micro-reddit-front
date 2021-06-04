@@ -30,7 +30,6 @@ export default {
 
 <style lang="scss">
 @import "@/scss/_colors.scss";
-@import "@/scss/_inputs.scss";
 .modal {
   position: fixed;
   width: 100%;

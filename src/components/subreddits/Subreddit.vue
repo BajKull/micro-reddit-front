@@ -93,6 +93,10 @@ export default {
   flex-direction: column;
   background-color: $gray;
 
+  .flex {
+    display: flex;
+  }
+
   .subredditEmpty {
     text-align: center;
     margin-top: 50px;

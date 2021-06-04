@@ -1,6 +1,7 @@
 <template>
   <div class="profile">
     <div class="content">
+      <h1 class="profileTitle">User profile</h1>
       <div class="section">
         <label class="sectionTitle" for="username">Username</label>
         <input
@@ -25,7 +26,7 @@
       <div class="section">
         <h2 class="sectionTitle">Security</h2>
         <p>You can change your password by pressing the button below.</p>
-        <button class="mainSubmit" @click="changePassword">
+        <button class="mainButton" @click="changePassword">
           Change password
         </button>
       </div>
@@ -73,9 +74,14 @@ export default {
   flex-direction: column;
 
   .content {
-    width: 80%;
+    width: 30%;
     margin: 0 auto;
     padding-top: 25px;
+
+    .profileTitle {
+      margin-bottom: 50px;
+      text-align: center;
+    }
   }
 
   .section {
@@ -90,13 +96,13 @@ export default {
     }
 
     .mainInputDarker {
-      width: 280px;
       margin-right: 25px;
+      width: calc(100% - 20px);
     }
 
-    .mainSubmit {
+    .mainButton {
       margin: 10px 0;
-      max-width: 300px;
+      width: fit-content;
     }
   }
 }

@@ -92,7 +92,7 @@ const actions = {
   },
   getSubreddits: ({ commit, state, dispatch }, { sort }) => {
     if (!state.user || state.user === "noUser") {
-      dispatch("getSubredditsAll", { sort });
+      dispatch("getSubredditsAll", { sort, limit: true });
       return;
     }
     axios
@@ -100,16 +100,15 @@ const actions = {
         params: { user: state.user?.id || null, sort },
       })
       .then((res) => {
-        console.log(res);
         commit("setSubreddits", res.data);
       })
       .catch((err) =>
         commit("setError", { active: true, msg: err.response.data })
       );
   },
-  getSubredditsAll: ({ commit }, { sort }) => {
+  getSubredditsAll: ({ commit }, { sort, limit = false }) => {
     axios
-      .get(`${URL}/subredditsAll`, { params: { sort } })
+      .get(`${URL}/subredditsAll`, { params: { sort, limit } })
       .then((res) => {
         commit("setSubreddits", res.data);
       })
@@ -190,9 +189,10 @@ const actions = {
   deletePost: ({ commit, state }, { router, id, path, subredditName }) => {
     const user = state.user;
     if (!user && user === "noUser") return;
-    state.socket.emit("deletePost", { user, id, path, subredditName });
     commit("deletePost", { id });
-    router.push(`/r/${subredditName}`);
+    state.socket.emit("deletePost", { user, id, path, subredditName }, () => {
+      if (path.split("/").length === 4) router.push(`/r/${subredditName}`);
+    });
   },
   joinSubreddit: ({ commit, state }, { subredditId }) => {
     const userId = state.user.id;

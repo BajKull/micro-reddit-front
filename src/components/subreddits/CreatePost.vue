@@ -82,7 +82,6 @@ export default {
     },
     post(e) {
       e.preventDefault();
-      console.log(this.video);
       if (this.name.length < 3) {
         this.setError("Post name must be at least 3 characters long.");
         return;
