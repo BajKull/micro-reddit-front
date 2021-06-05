@@ -36,7 +36,7 @@
       />
       <input type="submit" class="mainSubmit" />
     </form>
-    <p>
+    <p class="additionalInfo">
       Already have an account?
       <span class="underline" @click="signIn">Sign in!</span>
     </p>

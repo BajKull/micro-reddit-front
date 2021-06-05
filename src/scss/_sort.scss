@@ -1,12 +1,26 @@
 .sort {
   width: calc(100% - 100px);
   background-color: white;
-  min-width: 400px;
   padding: 15px 50px;
   border-radius: 5px;
   margin: auto;
   margin-bottom: 25px;
   display: flex;
+  align-items: center;
+
+  @include breakpoint(900px) {
+    padding: 15px;
+    width: calc(100% - 30px);
+  }
+
+  @include breakpoint(350px) {
+    flex-direction: column;
+  }
+
+  @include breakpoint(305px) {
+    width: calc(100% - 20px);
+    padding: 15px 10px;
+  }
 
   .active {
     background: $main;
@@ -21,12 +35,22 @@
     display: flex;
     margin-left: auto;
 
+    @include breakpoint(350px) {
+      margin-top: 15px;
+      margin-left: 0;
+    }
+
     .cardContainer,
     .listContainer {
       max-height: 30px;
       max-width: 30px;
       cursor: pointer;
-      margin-left: 15px;
+      margin-right: 15px;
+
+      @include breakpoint(600px) {
+        max-height: 20px;
+        max-width: 20px;
+      }
 
       svg {
         height: 100%;
@@ -55,6 +79,14 @@
     margin-right: 10px;
     cursor: pointer;
     transition: background-color 0.2s;
+
+    @include breakpoint(600px) {
+      font-size: 0.6em;
+    }
+
+    @include breakpoint(305px) {
+      padding: 5px 10px;
+    }
 
     &:hover {
       background: darken($gray, 5);

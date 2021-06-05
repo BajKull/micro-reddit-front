@@ -1,0 +1,21 @@
+h1,
+.h1 {
+  font-size: clamp(1.25em, 3vw, 1.75em);
+}
+
+h2 {
+  font-size: clamp(1.15em, 3vw, 1.5em);
+}
+
+label {
+  font-size: clamp(0.7em, 1.5vw, 1em);
+}
+
+p {
+  font-size: clamp(0.7em, 1.5vw, 1em);
+}
+
+.tip {
+  font-size: clamp(0.6em, 1vw, 0.8em);
+  color: darken($gray, 30);
+}

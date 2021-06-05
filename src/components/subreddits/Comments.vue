@@ -96,6 +96,7 @@ export default {
 
 <style lang="scss">
 @import "@/scss/_colors.scss";
+@import "@/scss/_mixins.scss";
 .comments {
   width: calc(100% - 50px);
   display: flex;
@@ -103,6 +104,11 @@ export default {
   background-color: white;
   padding: 25px;
   border-radius: 5px;
+
+  @include breakpoint(600px) {
+    width: calc(100% - 20px);
+    padding: 25px 10px;
+  }
 
   .commentsAdd {
     width: 100%;

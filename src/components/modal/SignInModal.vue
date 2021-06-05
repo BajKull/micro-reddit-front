@@ -13,7 +13,7 @@
       />
       <input class="mainSubmit" type="submit" />
     </form>
-    <p>
+    <p class="additionalInfo">
       Don't have an account?
       <span class="underline" @click="signUp">Sign up for free!</span>
     </p>

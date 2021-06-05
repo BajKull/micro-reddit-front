@@ -23,6 +23,7 @@ export default {
 
 <style lang="scss">
 @import "@/scss/_colors.scss";
+@import "@/scss/_mixins.scss";
 .userPanel {
   position: absolute;
   right: 0;
@@ -35,6 +36,10 @@ export default {
   padding: 5px 0;
   z-index: 100;
 
+  @include breakpoint(600px) {
+    right: 10px;
+  }
+
   .userPanelEl {
     display: block;
     text-decoration: none;
@@ -46,6 +51,10 @@ export default {
 
     &:hover {
       background-color: darken($gray, 5);
+    }
+
+    @include breakpoint(600px) {
+      font-size: 0.8em;
     }
   }
 }

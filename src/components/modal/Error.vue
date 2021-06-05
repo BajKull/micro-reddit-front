@@ -39,6 +39,8 @@ export default {
   transform: translateX(-50%);
   background-color: $error;
   border-radius: 3px;
+  min-width: 250px;
+
   .content {
     position: relative;
     padding: 15px 35px;

@@ -67,10 +67,17 @@ export default {
 
 <style lang="scss">
 @import "@/scss/_colors.scss";
+@import "@/scss/_mixins.scss";
 .subredditManage {
   .content {
     margin: auto;
     width: 30%;
+    min-width: 500px;
+
+    @include breakpoint(600px) {
+      width: calc(100% - 10px);
+      min-width: initial;
+    }
   }
   .subredditManageTitle {
     margin-top: 75px;

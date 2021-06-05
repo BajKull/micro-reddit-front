@@ -67,6 +67,7 @@ export default {
 
 <style lang="scss">
 @import "@/scss/_colors.scss";
+@import "@/scss/_mixins.scss";
 .profile {
   background-color: $gray;
   min-height: calc(100vh - 60px);
@@ -75,8 +76,14 @@ export default {
 
   .content {
     width: 30%;
+    min-width: 500px;
     margin: 0 auto;
     padding-top: 25px;
+
+    @include breakpoint(600px) {
+      width: calc(100% - 10px);
+      min-width: initial;
+    }
 
     .profileTitle {
       margin-bottom: 50px;
@@ -96,7 +103,6 @@ export default {
     }
 
     .mainInputDarker {
-      margin-right: 25px;
       width: calc(100% - 20px);
     }
 

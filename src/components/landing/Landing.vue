@@ -41,6 +41,7 @@ export default {
 
 <style lang="scss">
 @import "@/scss/_colors.scss";
+@import "@/scss/_mixins.scss";
 .landing {
   background-color: $gray;
   padding: 25px 0;
@@ -51,6 +52,24 @@ export default {
 
   .posts {
     width: 30%;
+    min-width: 500px;
+
+    @include breakpoint(900px) {
+      min-width: initial;
+      width: 400px;
+    }
+
+    @include breakpoint(600px) {
+      min-width: initial;
+      width: calc(100% - 10px);
+      padding: 5px;
+    }
+  }
+
+  .subreddits {
+    @include breakpoint(900px) {
+      display: none;
+    }
   }
 
   .landingPersonalized {
@@ -61,6 +80,11 @@ export default {
     border-radius: 5px;
     text-align: center;
     margin-bottom: 25px;
+
+    @include breakpoint(600px) {
+      padding: 15px;
+      width: calc(100% - 30px);
+    }
 
     .mainButton {
       border-radius: 50px;

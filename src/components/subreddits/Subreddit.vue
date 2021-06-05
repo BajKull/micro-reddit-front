@@ -15,15 +15,13 @@
         v-if="user && user !== 'noUser'"
         :class="
           user.subreddits.includes($route.params.id)
-            ? 'subredditJoin leaveBtn'
-            : 'subredditJoin joinBtn'
+            ? 'mainButton subredditJoin leaveBtn'
+            : 'mainButton subredditJoin joinBtn'
         "
         @click="join"
       >
         {{ user.subreddits.includes($route.params.id) ? "Leave" : "Join" }}
       </button>
-
-      <router-link class="secondaryButton" to="/r">Subreddit list</router-link>
     </div>
     <div class="create">
       <input
@@ -84,14 +82,20 @@ export default {
 
 <style lang="scss">
 @import "@/scss/_colors.scss";
+@import "@/scss/_mixins.scss";
 .subredditList {
-  width: 90%;
-  padding: 25px 5%;
+  width: 100%;
+  padding: 25px 0;
   min-height: calc(100vh - 110px);
-  margin: auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   background-color: $gray;
+
+  @include breakpoint(600px) {
+    width: calc(100% - 10px);
+    padding: 25px 5px;
+  }
 
   .flex {
     display: flex;
@@ -99,18 +103,30 @@ export default {
 
   .subredditEmpty {
     text-align: center;
-    margin-top: 50px;
+    margin: 25px 0;
   }
 
   .postsList {
-    width: calc(30% + 100px);
-    margin: auto;
+    width: 30%;
+    min-width: 500px;
+    margin: 0 auto;
+
+    @include breakpoint(600px) {
+      width: 100%;
+      min-width: initial;
+    }
   }
 
   .create {
-    margin: auto;
-    width: calc(30% + 100px);
-    min-width: 400px;
+    margin: 0 auto;
+    width: 30%;
+    min-width: 500px;
+
+    @include breakpoint(600px) {
+      width: 100%;
+      min-width: initial;
+    }
+
     .mainInput {
       background-color: white;
       width: calc(100% - 40px);
@@ -125,12 +141,20 @@ export default {
     position: relative;
     margin-bottom: 50px;
     align-items: center;
+    width: 80%;
+    margin: 0 auto 50px auto;
+    width: 30%;
+    min-width: 500px;
+
+    @include breakpoint(600px) {
+      width: 100%;
+      min-width: initial;
+    }
 
     .subredditManage {
       display: block;
       position: absolute;
-      right: 100px;
-      left: initial;
+      left: 0;
       width: 50px;
       text-align: center;
     }
@@ -147,10 +171,6 @@ export default {
     .subredditJoin {
       position: absolute;
       right: 0;
-      border-radius: 5px;
-      padding: 10px 25px;
-      border: 0;
-      cursor: pointer;
     }
     .joinBtn {
       background: $main;

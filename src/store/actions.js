@@ -169,7 +169,7 @@ const actions = {
         commit("setError", { active: true, msg: err.response.data });
       });
   },
-  likePost: ({ commit, state }, { value, postId }) => {
+  likePost: ({ commit, state }, { value, postId, postsOverview }) => {
     const userId = state.user.id;
     const data = { value, postId, userId };
     if (!userId) {
@@ -179,7 +179,7 @@ const actions = {
       });
       return;
     }
-    commit("likePost", { value, postId });
+    commit("likePost", { value, postId, postsOverview });
     axios
       .post(`${URL}/likePost`, { data })
       .catch((err) =>
@@ -222,9 +222,10 @@ const actions = {
         commit("setError", { active: true, msg: err.response.data });
       });
   },
-  getPost: ({ commit }, { postId }) => {
+  getPost: ({ state, commit }, { postId }) => {
+    const userId = state.user.id;
     axios
-      .get(`${URL}/getPost`, { params: { postId } })
+      .get(`${URL}/getPost`, { params: { postId, userId } })
       .then((res) => {
         commit("setPost", res.data);
       })

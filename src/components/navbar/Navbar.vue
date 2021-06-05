@@ -1,6 +1,7 @@
 <template>
   <div class="navbar">
     <router-link to="/">Home</router-link>
+    <router-link to="/r">Subreddits</router-link>
     <SearchBox />
     <SignIn @showPanel="showPanel" />
     <UserPanel
@@ -35,6 +36,16 @@ export default {
       if (this.panel && !accepted.includes(elClass)) this.showPanel(false);
     });
   },
+  computed: {
+    url() {
+      return this.$route.fullPath;
+    },
+  },
+  watch: {
+    url() {
+      this.panel = false;
+    },
+  },
 };
 </script>
 
@@ -53,9 +64,19 @@ export default {
     width: 90%;
   }
 
+  @include breakpoint(600px) {
+    width: calc(100% - 20px);
+    padding: 10px;
+  }
+
   a {
     text-decoration: none;
     color: black;
+    margin-right: 15px;
+
+    @include breakpoint(600px) {
+      font-size: 0.6em;
+    }
   }
 }
 </style>

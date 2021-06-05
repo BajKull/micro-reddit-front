@@ -55,6 +55,7 @@ export default {
 
 <style lang="scss">
 @import "@/scss/_colors.scss";
+@import "@/scss/_mixins.scss";
 .search {
   width: 100%;
   background-color: $gray;
@@ -71,7 +72,14 @@ export default {
 
   .content {
     width: 30%;
+    min-width: 500px;
     margin: auto;
+
+    @include breakpoint(600px) {
+      min-width: initial;
+      width: calc(100% - 10px);
+      padding: 0 5px;
+    }
 
     .subreddit {
       display: flex;
@@ -92,16 +100,15 @@ export default {
         flex-direction: column;
         .subredditTitle {
           margin-bottom: 10px;
-          font-size: 1.75em;
         }
 
         .subredditDesc {
           margin-bottom: 10px;
-        }
 
-        .subredditUsers {
-          font-size: 0.8em;
-          color: darken($gray, 30);
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
       }
     }
@@ -115,6 +122,12 @@ export default {
       background-color: $darkMain;
       color: white;
       margin-right: 30px;
+
+      @include breakpoint(900px) {
+        min-width: 45px;
+        min-height: 45px;
+        font-size: 1.25em;
+      }
       p {
         line-height: 0;
         position: absolute;

@@ -69,10 +69,16 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/scss/_mixins.scss";
 .createSubreddit {
   width: 30%;
   min-width: 500px;
   margin: auto;
+
+  @include breakpoint(600px) {
+    width: calc(100% - 10px);
+    min-width: initial;
+  }
 
   .createSubredditTitle {
     text-align: center;

@@ -14,6 +14,11 @@
   &:hover {
     background: darken($main, 5);
   }
+
+  @include breakpoint(600px) {
+    font-size: 0.6em;
+    padding: 10px 15px;
+  }
 }
 
 .cancelButton {
@@ -30,6 +35,11 @@
   text-decoration: none;
   font-size: 13px;
   text-align: center;
+
+  @include breakpoint(600px) {
+    font-size: 0.6em;
+    padding: 10px 15px;
+  }
 }
 
 .secondaryButton {
@@ -45,6 +55,11 @@
   text-decoration: none;
   font-size: 13px;
 
+  @include breakpoint(600px) {
+    font-size: 0.6em;
+    padding: 10px 15px;
+  }
+
   &:hover {
     background: darken($darkMain, 5);
   }
@@ -56,6 +71,10 @@
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;
+
+  @include breakpoint(600px) {
+    font-size: 0.8em;
+  }
 
   &:focus {
     outline: 0;
@@ -69,6 +88,10 @@
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;
+
+  @include breakpoint(600px) {
+    font-size: 0.6em;
+  }
 }
 
 .mainSubmit {
@@ -83,6 +106,12 @@
   border: 0;
   padding: 10px;
   border-radius: 5px;
+
+  @include breakpoint(600px) {
+    font-size: 0.6em;
+    padding: 10px 15px;
+  }
+
   &:hover {
     background: darken($main, 5);
   }

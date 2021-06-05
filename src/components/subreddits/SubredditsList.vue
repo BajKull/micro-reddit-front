@@ -1,14 +1,18 @@
 <template>
   <div class="sort">
-    <button ref="sort1" @click="setSort('sort1')">
-      most users
-    </button>
-    <button ref="sort2" @click="setSort('sort2')">
-      most posts
-    </button>
+    <div>
+      <button ref="sort1" @click="setSort('sort1')">
+        most users
+      </button>
+      <button ref="sort2" @click="setSort('sort2')">
+        most posts
+      </button>
+    </div>
   </div>
   <div class="sort" v-if="$store.state.subreddits.length === 0">
-    There are no subreddits to show.
+    <p>
+      There are no subreddits to show.
+    </p>
   </div>
   <router-link
     :to="`/r/${subreddit.name}`"
@@ -22,7 +26,7 @@
     <div class="subredditInfo">
       <h2 class="subredditTitle">{{ subreddit.name }}</h2>
       <p class="subredditDesc">{{ subreddit.description }}</p>
-      <p class="subredditUsers">
+      <p class="subredditUsers tip">
         {{ subreddit.users }} user{{ subreddit.users > 1 ? "s" : "" }}
       </p>
     </div>

@@ -21,11 +21,11 @@
     <button class="deleteBtn" @click="deletePost">Delete post</button>
   </div>
   <router-link class="content" :to="`/r/${post.name}/${post.id}`">
-    <p class="date">Posted {{ getDate(post.creation_date) }}</p>
+    <p class="tip">Posted {{ getDate(post.creation_date) }}</p>
     <h2 class="postTitle">{{ post.title }}</h2>
     <p class="postContent">{{ post.content }}</p>
     <img :src="post.image_path" v-if="post.image_path" class="postImage" />
-    <p class="postComments">
+    <p class="tip">
       {{
         post.comments == 0
           ? "No comments"
@@ -55,7 +55,8 @@ export default {
     },
     like(event, value, postId) {
       event.stopPropagation();
-      this.$store.dispatch("likePost", { value, postId });
+      const postsOverview = this.$route.params.postId ? false : true;
+      this.$store.dispatch("likePost", { value, postId, postsOverview });
     },
     deletePost(e) {
       e.stopPropagation();
@@ -79,7 +80,6 @@ export default {
 @import "@/scss/_colors.scss";
 .post {
   width: calc(100% - 100px);
-  min-width: 400px;
   margin: auto;
   background-color: white;
   padding: 15px 50px;
@@ -96,9 +96,7 @@ export default {
     min-height: 100px;
     text-decoration: none;
     color: inherit;
-    .date {
-      font-size: 0.7em;
-      color: rgb(100, 100, 100);
+    .tip {
       margin-bottom: 5px;
     }
   }
@@ -120,11 +118,6 @@ export default {
     max-height: 600px;
     max-width: 100%;
     object-fit: contain;
-  }
-
-  .postComments {
-    font-size: 0.8em;
-    color: rgb(100, 100, 100);
   }
 
   .postVotes {
@@ -150,7 +143,7 @@ export default {
 
     .arrowUp {
       &:hover {
-        fill: $success;
+        fill: lighten($success, 10);
       }
     }
     .arrowDown {
@@ -160,7 +153,7 @@ export default {
     }
     .liked {
       .arrowUp {
-        fill: $success;
+        fill: lighten($success, 10);
       }
     }
     .disliked {

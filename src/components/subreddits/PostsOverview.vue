@@ -1,14 +1,16 @@
 <template>
   <div class="sort">
-    <button ref="sort1" @click="setSort('sort1')">
-      newest
-    </button>
-    <button ref="sort2" @click="setSort('sort2')">
-      most popular
-    </button>
-    <button ref="sort3" @click="setSort('sort3')">
-      trending
-    </button>
+    <div>
+      <button ref="sort1" @click="setSort('sort1')">
+        newest
+      </button>
+      <button ref="sort2" @click="setSort('sort2')">
+        popular
+      </button>
+      <button ref="sort3" @click="setSort('sort3')">
+        trending
+      </button>
+    </div>
     <div class="views">
       <div class="cardContainer" ref="view1" @click="setView('view1')">
         <Icon iconName="card" />
@@ -19,7 +21,9 @@
     </div>
   </div>
   <div class="sort" v-if="$store.state.subreddit.length === 0">
-    There are no posts to show.
+    <p>
+      There are no posts to show.
+    </p>
   </div>
   <div class="post" v-for="post in posts" :key="post.id">
     <PostOverview :post="post" />

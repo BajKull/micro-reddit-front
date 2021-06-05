@@ -29,6 +29,7 @@ export default {
 @import "@/scss/_colors.scss";
 .subreddits {
   width: 15%;
+  min-width: 250px;
   margin-left: 50px;
   background-color: white;
   border-radius: 5px;

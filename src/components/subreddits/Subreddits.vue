@@ -2,8 +2,11 @@
   <div class="subredditsList">
     <div class="subredditsInfo">
       <h1 class="subredditsTitle">Subreddits</h1>
-      <router-link to="/r/CreateSubreddit" class="mainButton"
+      <router-link to="/r/CreateSubreddit" class="mainButton createBig"
         >Create subreddit</router-link
+      >
+      <router-link to="/r/CreateSubreddit" class="mainButton createSmall"
+        >+</router-link
       >
     </div>
     <div class="content">
@@ -22,6 +25,7 @@ export default {
 
 <style lang="scss">
 @import "@/scss/_colors.scss";
+@import "@/scss/_mixins.scss";
 .subredditsList {
   display: flex;
   flex-direction: column;
@@ -30,6 +34,16 @@ export default {
   padding: 25px 5%;
   min-height: 100vh;
   background-color: $gray;
+
+  @include breakpoint(900px) {
+    padding: 25px;
+    width: calc(100% - 50px);
+  }
+
+  @include breakpoint(600px) {
+    padding: 25px 5px;
+    width: calc(100% - 10px);
+  }
 
   .subredditsInfo {
     display: flex;
@@ -40,17 +54,35 @@ export default {
     .subredditsTitle {
       text-align: center;
       justify-self: center;
+      font-size: clamp(1.25em, 5vw, 3em);
     }
 
     .mainButton {
       position: absolute;
       right: 0;
     }
+
+    .createBig {
+      @include breakpoint(600px) {
+        display: none;
+      }
+    }
+    .createSmall {
+      display: none;
+      @include breakpoint(600px) {
+        display: initial;
+      }
+    }
   }
 
   .content {
     width: 60%;
     margin: auto;
+
+    @include breakpoint(900px) {
+      width: 100%;
+    }
+
     .subreddit {
       display: flex;
       align-items: center;
@@ -65,21 +97,24 @@ export default {
         background-color: darken($gray, 10);
       }
 
+      @include breakpoint(900px) {
+        padding: 10px;
+      }
+
       .subredditInfo {
         display: flex;
         flex-direction: column;
         .subredditTitle {
           margin-bottom: 10px;
-          font-size: 1.75em;
         }
 
         .subredditDesc {
           margin-bottom: 10px;
-        }
 
-        .subredditUsers {
-          font-size: 0.8em;
-          color: darken($gray, 30);
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
       }
     }
@@ -93,6 +128,13 @@ export default {
       background-color: $darkMain;
       color: white;
       margin-right: 30px;
+
+      @include breakpoint(900px) {
+        min-width: 45px;
+        min-height: 45px;
+        font-size: 1.25em;
+      }
+
       p {
         line-height: 0;
         position: absolute;

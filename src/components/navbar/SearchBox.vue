@@ -25,6 +25,13 @@ export default {
   },
   methods: {
     search() {
+      if (this.searchText.length < 3) {
+        this.$store.commit("setError", {
+          active: true,
+          msg: "You need to search for at least 3 characters.",
+        });
+        return;
+      }
       this.$router.push(`/search/${this.searchText}`);
       this.searchText = "";
     },
@@ -39,18 +46,17 @@ export default {
 @import "@/scss/_colors.scss";
 @import "@/scss/_mixins.scss";
 .searchBox {
-  width: calc(100% - 240px);
+  width: calc(100% - 290px);
   display: flex;
   align-items: center;
-  margin-left: 50px;
   background-color: $gray;
   height: 38px;
   border-radius: 5px;
   position: relative;
 
   @include breakpoint(600px) {
-    width: calc(100% - 185px);
-    margin-left: 25px;
+    width: calc(100% - 215px);
+    font-size: 0.8em;
   }
 
   .searchContainer {
@@ -65,12 +71,22 @@ export default {
     &:hover {
       opacity: 1;
     }
+
+    @include breakpoint(600px) {
+      width: 15px;
+      height: 15px;
+      padding: 14px 9px;
+    }
   }
 
   .mainInput {
     width: 100%;
     margin: 0;
     padding-left: 48px;
+
+    @include breakpoint(600px) {
+      padding-left: 38px;
+    }
   }
 }
 </style>

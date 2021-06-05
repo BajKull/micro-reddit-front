@@ -44,16 +44,16 @@ export default {
 
   .content {
     position: relative;
-    width: clamp(300px, 30%, 400px);
+    width: clamp(220px, 50%, 400px);
     display: flex;
     flex-direction: column;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 25px;
 
     h1 {
       text-align: center;
-      margin-bottom: 15px;
+      margin-bottom: 35px;
     }
 
     .underline {
@@ -64,6 +64,10 @@ export default {
       &:hover {
         color: #000;
       }
+    }
+
+    .additionalInfo {
+      margin-top: 10px;
     }
   }
   .closeContainer {

@@ -171,10 +171,17 @@ export default {
 
 <style lang="scss">
 @import "@/scss/_colors.scss";
+@import "@/scss/_mixins.scss";
 .createPost {
   width: 30%;
   min-width: 500px;
   margin: auto;
+  padding-bottom: 25px;
+
+  @include breakpoint(900px) {
+    width: calc(100% - 10px);
+    min-width: initial;
+  }
 
   .createPostTitle {
     text-align: center;
@@ -257,6 +264,13 @@ export default {
         transform: translateY(-50%);
         right: 5px;
         cursor: pointer;
+
+        @include breakpoint(600px) {
+          width: 24px;
+          height: 24px;
+          top: 41px;
+          right: 10px;
+        }
       }
       .remove {
         width: 100%;
