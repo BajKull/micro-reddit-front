@@ -8,10 +8,8 @@ export default {
   beforeMount: function() {
     const socket = this.$store.state.socket;
     socket.on("commentReceive", (data) => {
-      this.$store.commit("addComment", {
-        nickname: data.nickname,
-        content: data.content,
-      });
+      console.log(data);
+      this.$store.commit("addComment", data);
     });
     socket.on("deletePost", ({ id }) => {
       if (this.$route.params.postId == id) {

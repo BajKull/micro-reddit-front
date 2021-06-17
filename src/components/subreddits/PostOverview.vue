@@ -25,6 +25,15 @@
     <h2 class="postTitle">{{ post.title }}</h2>
     <p class="postContent">{{ post.content }}</p>
     <img :src="post.image_path" v-if="post.image_path" class="postImage" />
+    <iframe
+      :src="videoUrl"
+      v-if="
+        post.video_url &&
+          (routeName === 'SubredditPost' ||
+            (routeName !== 'SubredditPost' && !post.image_path))
+      "
+      class="postVideo"
+    />
     <p class="tip">
       {{
         post.comments == 0
@@ -72,6 +81,12 @@ export default {
     user() {
       return this.$store.state.user;
     },
+    videoUrl() {
+      return this.post.video_url.replace("watch?v=", "embed/");
+    },
+    routeName() {
+      return this.$route.name;
+    },
   },
 };
 </script>
@@ -118,6 +133,12 @@ export default {
     max-height: 600px;
     max-width: 100%;
     object-fit: contain;
+  }
+
+  .postVideo {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin-top: 25px;
   }
 
   .postVotes {

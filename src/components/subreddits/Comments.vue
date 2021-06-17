@@ -56,10 +56,6 @@ export default {
       }
       const postId = this.$route.params.postId;
       const path = this.$route.fullPath;
-      this.$store.commit("addComment", {
-        nickname: user.username,
-        content: this.commentText,
-      });
       this.$store.state.socket.emit("commentSend", {
         path,
         user,
