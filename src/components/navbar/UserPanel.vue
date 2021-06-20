@@ -14,7 +14,7 @@ export default {
     signOut() {
       this.$emit("showPanel", false);
       this.$store.dispatch("signOut", {
-        username: this.$store.state.user.nickname,
+        username: this.$store.state.user.username,
       });
     },
   },

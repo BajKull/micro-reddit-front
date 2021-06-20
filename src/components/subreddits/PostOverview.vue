@@ -55,6 +55,7 @@ export default {
   },
   methods: {
     getDate(d) {
+      console.log(this.post);
       const date = moment(d);
       const today = moment(Date.now());
       if (date.isSame(today, "day")) return `today ${date.format("HH:mm")}`;
@@ -93,6 +94,7 @@ export default {
 
 <style lang="scss">
 @import "@/scss/_colors.scss";
+@import "@/scss/_mixins.scss";
 .post {
   width: calc(100% - 100px);
   margin: auto;
@@ -188,13 +190,25 @@ export default {
     position: absolute;
     right: 15px;
     top: 15px;
+
+    @include breakpoint(400px) {
+      top: 5px;
+      right: 5px;
+    }
+
     .deleteBtn {
-      padding: 10px 25px;
+      padding: 10px 15px;
       color: white;
       border-radius: 5px;
       background: $error;
       border: 0;
       cursor: pointer;
+
+      @include breakpoint(400px) {
+        font-size: 0.6em;
+        padding: 5px 10px;
+      }
+
       &:hover {
         background: darken($error, 5);
       }

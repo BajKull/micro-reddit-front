@@ -31,7 +31,16 @@ export default createStore({
       state.sortPosts = payload;
     },
     setPost(state, payload) {
-      state.post = payload;
+      const post = payload;
+      if (post.video_url === "null") post.video_url = null;
+      if (post.image_path) {
+        try {
+          new URL(post.image_path);
+        } catch (error) {
+          post.image_path = `http://localhost:5000/getImage/${post.image_path}`;
+        }
+      }
+      state.post = post;
     },
     addComment(state, payload) {
       state.post.commentList.unshift(payload);
@@ -53,7 +62,19 @@ export default createStore({
       state.subreddits = payload;
     },
     setSubreddit(state, payload) {
-      state.subreddit = payload;
+      const posts = payload.map((p) => {
+        if (!p.image_path) return p;
+        try {
+          new URL(p.image_path);
+          return p;
+        } catch (error) {
+          return {
+            ...p,
+            image_path: `http://localhost:5000/getImage/${p.image_path}`,
+          };
+        }
+      });
+      state.subreddit = posts;
     },
     addSubreddit(state, payload) {
       state.subreddits.push(payload);

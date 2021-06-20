@@ -11,10 +11,14 @@
         form="postForm"
         name="content"
       />
-      <label for="image"
-        >Image URL - <span class="italic">Optional</span></label
-      >
-      <input class="mainInput" v-model="image" type="text" name="image" />
+      <label for="image">Image - <span class="italic">Optional</span></label>
+      <input
+        class="mainInput"
+        @change="setImage"
+        ref="imageRef"
+        type="file"
+        name="image"
+      />
       <label for="video"
         >Video URL - <span class="italic">Optional</span></label
       >
@@ -66,7 +70,7 @@ export default {
     return {
       name: "",
       content: "",
-      image: "",
+      image: null,
       video: "",
       survey: {
         active: false,
@@ -79,6 +83,9 @@ export default {
   methods: {
     setError(msg) {
       this.$store.commit("setError", { active: true, msg });
+    },
+    setImage() {
+      this.image = this.$refs.imageRef.files[0];
     },
     post(e) {
       e.preventDefault();
@@ -93,18 +100,6 @@ export default {
       if (this.content.length > 10000) {
         this.setError("Post content too long.");
         return;
-      }
-      if (this.image) {
-        try {
-          new URL(this.image);
-          if (!this.image.match(/\.(jpeg|jpg|gif|png)$/)) {
-            this.setError("Image is not a valid image URL.");
-            return;
-          }
-        } catch (e) {
-          this.setError("Image is not a valid URL.");
-          return;
-        }
       }
       if (
         this.video &&

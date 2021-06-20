@@ -20,7 +20,6 @@ const actions = {
     axios
       .post(`${URL}/signIn`, { username, password })
       .then((res) => {
-        console.log(res.data.user);
         localStorage.setItem("sessionID", res.data.sessionID);
         commit("setUser", res.data.user);
         commit("setModal", "");
@@ -147,17 +146,16 @@ const actions = {
     { commit, state },
     { name, content, image, video, survey, subredditId, router }
   ) => {
-    const data = {
-      name,
-      content,
-      image,
-      video,
-      survey,
-      subredditId,
-      userId: state.user.id,
-    };
+    const data = new FormData();
+    data.append("name", name);
+    data.append("content", content);
+    data.append("image", image);
+    data.append("video", video);
+    data.append("survey", survey);
+    data.append("subredditId", subredditId);
+    data.append("userId", state.user.id);
     axios
-      .post(`${URL}/createPost`, { data })
+      .post(`${URL}/createPost`, data)
       .then(() => {
         commit("setSuccess", {
           active: true,
